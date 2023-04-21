@@ -1,7 +1,8 @@
+import { type FC } from "react";
 import Link from "next/link";
 import { UserButton, useUser } from "@clerk/nextjs";
 
-const NavBar = () => {
+const NavBar: FC = () => {
   const user = useUser();
 
   return (

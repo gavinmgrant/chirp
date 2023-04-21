@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import permitsReducer from "../features/permits/permitsSlice";
+import permitsReducer from "../features/permits/slices/permitsSlice";
 
 export const store = configureStore({
   reducer: {
