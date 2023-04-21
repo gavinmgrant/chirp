@@ -25,13 +25,13 @@ export const permitsSlice = createSlice({
     addPermits: (state, action: PayloadAction<Permit[]>) => {
       state.value = [...action.payload];
     },
-    resetPermits: () => {
+    clearPermits: () => {
       return initialState;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addPermits, resetPermits } = permitsSlice.actions;
+export const { addPermits, clearPermits } = permitsSlice.actions;
 
 export default permitsSlice.reducer;
