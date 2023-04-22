@@ -1,10 +1,13 @@
-import { type FC } from "react";
+import { type FC, useState } from "react";
 import { usePermits } from "../hooks/usePermits";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { mapStyle } from "../utils/MapStyle";
+import PermitModal from "~/features/permits/components/PermitModal";
 
 const PermitsMap: FC = () => {
   const permits = usePermits();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [permitId, setPermitId] = useState("");
 
   const containerStyle = {
     width: "100%",
@@ -26,6 +29,7 @@ const PermitsMap: FC = () => {
 
   return (
     <LoadScript googleMapsApiKey={apiKey}>
+      <PermitModal id={permitId} open={modalOpen} setOpen={setModalOpen} />
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -34,19 +38,19 @@ const PermitsMap: FC = () => {
       >
         {permits.map((permit, index) => {
           return (
-            <div key={index} className="opacity-50">
-              <Marker
-                clickable
-                icon={{
-                  url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Map_marker_font_awesome.svg/240px-Map_marker_font_awesome.svg.png",
-                  scaledSize: new window.google.maps.Size(32, 32),
-                }}
-                position={{
-                  lat: permit.lat,
-                  lng: permit.lng,
-                }}
-              />
-            </div>
+            <Marker
+              key={index}
+              clickable
+              icon="https://api.iconify.design/ic:round-location-on.svg?width=32&height=32"
+              position={{
+                lat: permit.lat,
+                lng: permit.lng,
+              }}
+              onClick={() => {
+                setModalOpen(true);
+                setPermitId(permit.permitNumber);
+              }}
+            />
           );
         })}
       </GoogleMap>
