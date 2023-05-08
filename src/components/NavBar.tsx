@@ -13,7 +13,7 @@ const NavBar: FC = () => {
       {!user.isSignedIn ? (
         <div className="flex space-x-4">
           <Link href="/sign-in">Sign in</Link>
-          <Link href="/sign-up">Sign up</Link>
+          <Link href="/sign-up" className="font-semibold">Sign up</Link>
         </div>
       ) : (
         <UserButton />
